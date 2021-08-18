@@ -1,0 +1,15 @@
+{
+    "name": "PPPOSClient",
+    "keywords": "gsm, sim800, internet, ppp, iot, mqtt",
+    "description": "A client library for gsm ppp protocol. This library can be used to make GET and POST requests and to connect mqtt with PubSubClient. It supports ESP32.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/levkovigor/ppposclient.git"
+    },
+    "version": "1.0",
+    "examples": "examples/*/*.ino",
+    "frameworks": "arduino",
+    "platforms": [
+        "espressif32"
+    ]
+}

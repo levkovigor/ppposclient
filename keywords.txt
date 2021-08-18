@@ -1,0 +1,34 @@
+#######################################
+# Syntax Coloring Map For PPPOSClient
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PPPOSClient			KEYWORD1
+PPPOS				KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+connect 			KEYWORD2
+PPPOS_write			KEYWORD2
+available			KEYWORD2
+read				KEYWORD2
+peek				KEYWORD2
+flush				KEYWORD2
+stop 				KEYWORD2
+connected 			KEYWORD2
+PPPOS_init			KEYWORD2
+PPPOS_isConnected	KEYWORD2
+PPPOS_start			KEYWORD2
+PPPOS_status		KEYWORD2
+PPPOS_stop			KEYWORD2
+PPPOS_write			KEYWORD2
+PPPOS_read			KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
