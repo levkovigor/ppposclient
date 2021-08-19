@@ -205,10 +205,10 @@ void PPPOS_start(){
         if (ppp == NULL) {
             return;
         }
-
+  }
         pppapi_set_default(ppp);
         pppapi_set_auth(ppp, PPPAUTHTYPE_PAP, PPP_User, PPP_Pass);
-        ppp_set_usepeerdns(ppp, 1);}
+        ppp_set_usepeerdns(ppp, 1);
         pppapi_connect(ppp, 0);
         
         PPPOS_started = true;
