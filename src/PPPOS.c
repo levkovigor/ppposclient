@@ -223,24 +223,6 @@ void PPPOS_stop(){
   pppapi_close(ppp, 0); 
 }
 
-/*void gsmInit(int txPin, int rxPin, int baudrate, int uart_number){
-  PPPOS_uart_num = uart_number;
-  gpio_set_direction(txPin, GPIO_MODE_OUTPUT);
-  gpio_set_direction(rxPin, GPIO_MODE_INPUT);
-  gpio_set_pull_mode(rxPin, GPIO_PULLUP_ONLY);
-   
-    uart_config_t uart_config = {
-      .baud_rate = baudrate,
-      .data_bits = UART_DATA_8_BITS,
-      .parity = UART_PARITY_DISABLE,
-      .stop_bits = UART_STOP_BITS_1,
-      .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
-  };
-    uart_param_config(PPPOS_uart_num, &uart_config) ;
-    uart_set_pin(PPPOS_uart_num, txPin, rxPin, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
-    uart_driver_install(PPPOS_uart_num, BUF_SIZE * 2, BUF_SIZE * 2, 0, NULL, 0);   
-}*/
-
 char* PPPOS_read(){
   memset(PPPOS_out, 0, BUF_SIZE);
   int len = uart_read_bytes(PPPOS_uart_num, (uint8_t *)PPPOS_out, BUF_SIZE, 10 / portTICK_RATE_MS);
