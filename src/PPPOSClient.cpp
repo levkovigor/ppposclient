@@ -235,7 +235,7 @@ int PPPOSClient::read(uint8_t *buf, size_t size) {
     int res = -1;
     int j = 0;
     if (available()){
-    	for (int i = _startPos; i < _endPos; i++) {
+    	for (int i = _startPos; i < (_endPos - 1); i++) {
             if (j < size) {
                 buf[j] = RxBuffer[i]; 
             } else {
