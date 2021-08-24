@@ -233,17 +233,20 @@ uint8_t PPPOSClient::connected() {
 int PPPOSClient::read(uint8_t *buf, size_t size) {
     if (!_connected) return -1;
     int res = -1;
+    int j = 0;
     if (available()){
-        int j = 0;
     	for (int i = _startPos; i < _endPos; i++) {
             if (j < size) {
                 buf[j] = RxBuffer[i]; 
             } else {
-                res = j; 
-                _startPos += j;
+                break;
             }
             j++;
         }
+    }
+    if (j > 0) {
+	    _startPos += j;
+	    res = j;
     }
     return res;
 }
