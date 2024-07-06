@@ -21,7 +21,6 @@
 #include "netif/ppp/pppapi.h"
 #include "PPPOS.h"
 
-
  #ifdef __cplusplus
 extern "C" {
 #endif
@@ -45,6 +44,10 @@ ppp_pcb *ppp;
 /* The PPP IP interface */
 struct netif ppp_netif;
 
+/* DNS Info */
+esp_netif_dns_info_t dns;
+ip_addr_t dns_server; 
+
 /* PPP status callback example */
 static void ppp_status_cb(ppp_pcb *pcb, int err_code, void *ctx)
 {
@@ -53,7 +56,12 @@ static void ppp_status_cb(ppp_pcb *pcb, int err_code, void *ctx)
 
     switch (err_code) {
     case PPPERR_NONE: {
+
+        esp_netif_dns_info_t dns_info = {0};
+        IP_ADDR4(&dns_info.ip, 8, 8, 8, 8);
         ESP_LOGE(TAG, "status_cb: Connected\n");
+        
+        esp_netif_set_dns_info(pppif, ESP_NETIF_DNS_MAIN, &dns_info);
     #if PPP_IPV4_SUPPORT
             ESP_LOGE(TAG, "   ipaddr_v4  = %s\n", ipaddr_ntoa(&pppif->ip_addr));
             ESP_LOGE(TAG, "   gateway  = %s\n", ipaddr_ntoa(&pppif->gw));
@@ -152,7 +160,6 @@ static u32_t ppp_output_callback(ppp_pcb *pcb, u8_t *data, u32_t len, void *ctx)
 }
 
 
-
 static void pppos_client_task(void *pvParameters)
 {
  
@@ -208,7 +215,7 @@ void PPPOS_start(){
   }
         pppapi_set_default(ppp);
         pppapi_set_auth(ppp, PPPAUTHTYPE_PAP, PPP_User, PPP_Pass);
-        ppp_set_usepeerdns(ppp, 1);
+        ppp_set_usepeerdns(ppp, 0);
         pppapi_connect(ppp, 0);
         
         PPPOS_started = true;
@@ -221,6 +228,7 @@ bool PPPOS_status(){
 
 void PPPOS_stop(){
   pppapi_close(ppp, 0); 
+  PPPOS_connected = false; 
 }
 
 char* PPPOS_read(){
@@ -235,6 +243,8 @@ char* PPPOS_read(){
 
 void PPPOS_write(char* cmd){
   uart_flush(PPPOS_uart_num);
+  // uart_flush_input(PPPOS_uart_num);
+
   if (cmd != NULL) {
      int cmdSize = strlen(cmd);
      uart_write_bytes(PPPOS_uart_num, (const char*)cmd, cmdSize);

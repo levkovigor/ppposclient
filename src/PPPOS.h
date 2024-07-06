@@ -5,7 +5,7 @@ extern "C" {
 #endif
 
 
-#define BUF_SIZE (1024)
+#define BUF_SIZE (4096)
 
 
 void PPPOS_init(int txPin, int rxPin, int baudrate, int uart_number, char* user, char* pass);

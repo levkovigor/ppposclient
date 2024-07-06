@@ -38,7 +38,7 @@ class PPPOSClient : public Client
       virtual void flush();
       virtual void stop();
       virtual uint8_t connected();
-    
+      
       using Print::write;
     
   protected:
